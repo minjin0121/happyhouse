@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.mapper.HouseMapper">
+
+	<select id="getSido" resultType="SidoGugunCode">
+      	SELECT left(sido_code, 2) sidoCode, sido_name sidoName FROM sidocode ORDER BY sido_code
+   	</select>
+
+   	<select id="getGugunInSido" parameterType="String" resultType="SidoGugunCode">
+      	SELECT left(gugun_code,5) gugunCode, gugun_name gugunName FROM guguncode WHERE left(gugun_code, 2) = #{sido}
+   	</select>
+	
+	<select id="getDongInGugun" parameterType="String" resultType="SidoGugunCode">
+		SELECT distinct dong gugunName, code gugunCode FROM houseinfo WHERE code = #{gugun} ORDER BY dong
+	</select>
+	
+	<select id="getAptInDong" parameterType="String" resultType="HouseInfo">
+		SELECT * FROM houseinfo WHERE dong = #{dong} ORDER BY AptName;
+	</select>
+	
+	<select id="selectAll" parameterType="String" resultType="HouseInfo">
+		SELECT * FROM houseinfo ORDER BY no limit 30
+	</select>
+	
+	<select id="search" parameterType="String" resultType="HouseInfo">
+		SELECT * FROM houseinfo where dong = #{dong} and AptName like concat('%', #{aptName}, '%') ORDER BY code
+	</select>
+	
+	<select id="detail" parameterType="String" resultType="HouseDeal">
+		SELECT * FROM housedeal where dong = #{dong} and AptName = #{aptName}
+	</select>
+
+</mapper>

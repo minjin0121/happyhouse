@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.mapper.BoardMapper">
+
+	<select id="selectAll" resultType="Board">
+		SELECT * FROM board ORDER BY NUM
+	</select>
+	
+	<select id="selectOne" parameterType="java.lang.String" resultType="Board">
+		SELECT * FROM board WHERE NUM = #{num}
+	</select>
+
+	<insert id="insert" parameterType="Board">
+		INSERT INTO board VALUES (null, #{PASS}, #{NAME}, sysdate(), #{TITLE}, #{CONTENT}, 0)
+	</insert>
+
+	<update id="countUp" parameterType="java.lang.String">
+		UPDATE board SET COUNT = COUNT + 1 WHERE NUM = #{num}
+	</update>
+
+	<delete id="delete" parameterType="string">
+		DELETE FROM board WHERE NUM = #{num}
+	</delete>
+
+	<select id="searchTitle" resultType="Board" parameterType="java.lang.String">
+		 SELECT * FROM board WHERE TITLE LIKE CONCAT('%', #{keyword}, '%')
+	</select>
+
+	<select id="searchName" resultType="Board" parameterType="java.lang.String">
+		 SELECT * FROM board WHERE NAME LIKE CONCAT('%', #{keyword}, '%')
+	</select>
+	
+	<update id="update" parameterType="Board">
+		UPDATE board SET TITLE = #{TITLE}, CONTENT = #{CONTENT} where NUM = #{NUM}
+	</update>
+	
+</mapper>
