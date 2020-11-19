@@ -5,6 +5,9 @@ import com.ssafy.happyhouse.model.dto.*;
 
 public interface HouseMapper {
 	
+	List<SidoGugunCode> getDongName(String keyword) throws Exception;
+	List<HouseInfo> getAptName(String keyword) throws Exception;
+	
 	List<SidoGugunCode> getSido() throws Exception;
 	List<SidoGugunCode> getGugunInSido(String sido) throws Exception;
 	List<SidoGugunCode> getDongInGugun(String gugun) throws Exception;

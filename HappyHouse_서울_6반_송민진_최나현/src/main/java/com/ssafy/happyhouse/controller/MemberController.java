@@ -2,27 +2,26 @@ package com.ssafy.happyhouse.controller;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.ssafy.happyhouse.model.dto.Member;
 import com.ssafy.happyhouse.model.service.MemberService;
 
-@Controller
-@RequestMapping("/member")
+@RestController
 public class MemberController {
 
 	@Autowired
 	MemberService service;
 
-	@GetMapping("/signin")
+	@GetMapping("/member/signin")
     public String signinView() { // 회원가입 화면
 		return "signin";
 	}
 	
-	@PostMapping("/signin")
+	@PostMapping("/member/signin")
 	public String signin(Member member, Model model) { // 회원가입 처리
 		System.out.println("Signin Member : " + member.getMemberID() + " / " + member.getMemberPW());
 		
@@ -36,12 +35,12 @@ public class MemberController {
 		}
 	}
 	
-	@GetMapping("/login")
+	@GetMapping("/member/login")
     public String loginView() { // 로그인 화면
 		return "loginForm";
 	}
 	
-	@PostMapping("/login")
+	@PostMapping("/member/login")
     public String login(String id, String pw, HttpSession session, Model model) { // 로그인 처리
 		System.out.println("ID : " + id + " / PW : " + pw);
 		
@@ -61,7 +60,7 @@ public class MemberController {
 		}
     }
 
-	@GetMapping("/info")
+	@GetMapping("/member/info")
     public String infoView(HttpSession session, Model model) { // 회원 정보 화면
 		String loginID = (String) session.getAttribute("memberID");
 		String loginPW = (String) session.getAttribute("memberPW");
@@ -80,7 +79,7 @@ public class MemberController {
 		return "memberInfo";
 	}
 	
-	@GetMapping("/update")
+	@GetMapping("/member/update")
 	public String updateView(HttpSession session, Model model) { // 회원 정보 수정 화면
 		String loginID = (String) session.getAttribute("memberID");
 		String loginPW = (String) session.getAttribute("memberPW");
@@ -99,7 +98,7 @@ public class MemberController {
 		return "change";
 	}
 	
-	@PostMapping("/update")
+	@PostMapping("/member/update")
 	public String update(Member member, Model model, HttpSession session) { // 회원 정보 수정
 		try {
 			service.memberUpdate(member);
@@ -113,7 +112,7 @@ public class MemberController {
 		return "index";	
 	}
 	
-	@GetMapping("/delete")
+	@GetMapping("/member/delete")
 	public String deleteView(HttpSession session, Model model) { // 회원 정보 삭제 화면
 		String loginID = (String) session.getAttribute("memberID");
 		String loginPW = (String) session.getAttribute("memberPW");
@@ -132,7 +131,7 @@ public class MemberController {
 		return "delete";
 	}
 	
-	@PostMapping("/delete")
+	@PostMapping("/member/delete")
 	public String delete(String memberID, String memberPW, Model model, HttpSession session) { // 회원 정보 삭제
 		try {
 			System.out.println("회원 정보 삭제 : " + memberID + " / " + memberPW);
@@ -146,7 +145,7 @@ public class MemberController {
 		return "redirect:/";	
 	}
 	
-	@GetMapping("/logout")
+	@GetMapping("/member/logout")
 	public String logout(HttpSession session) { // 로그아웃 처리
 		session.removeAttribute("memberID");
 		return "redirect:/";	

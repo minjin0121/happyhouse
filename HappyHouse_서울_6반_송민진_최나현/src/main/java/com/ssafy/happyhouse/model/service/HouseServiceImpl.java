@@ -13,6 +13,17 @@ public class HouseServiceImpl implements HouseService {
 	HouseDao dao;
 
 	@Override
+	public List<SidoGugunCode> getDongName(String keyword) throws Exception {
+		return dao.getDongName(keyword);
+	}
+	
+	@Override
+	public List<HouseInfo> getAptName(String keyword) throws Exception {
+		return dao.getAptName(keyword);
+	}
+	
+	
+	@Override
 	public List<SidoGugunCode> getSido() throws Exception {
 		return dao.getSido();
 	}

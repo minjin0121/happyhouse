@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.ssafy.happyhouse.model.dto.Board;
 import com.ssafy.happyhouse.model.service.BoardService;
@@ -18,7 +17,6 @@ import com.ssafy.happyhouse.model.service.BoardService;
 @MapperScan(basePackages = {"com.ssafy.happyhouse.mapper"})
 @CrossOrigin
 @RestController
-//@RequestMapping("/boards")
 public class BoardController {
 
 	@Autowired
